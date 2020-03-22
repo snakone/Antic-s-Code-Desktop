@@ -1,10 +1,11 @@
+
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
 /dist
 /tmp
 /out-tsc
-<<<<<<< Updated upstream
+
 # Only exists if Bazel was run
 /bazel-out
 
@@ -25,7 +26,6 @@ src/**/*.js
 
 # dependencies
 /node_modules
->>>>>>> Stashed changes
 
 # IDEs and editors
 /.idea
@@ -38,18 +38,16 @@ src/**/*.js
 
 # IDE - VSCode
 .vscode/*
-<<<<<<< Updated upstream
+
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
-=======
 .vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
->>>>>>> Stashed changes
 
 # misc
 /.sass-cache
@@ -57,7 +55,7 @@ src/**/*.js
 /coverage
 /libpeerconnection.log
 npm-debug.log
-<<<<<<< Updated upstream
+
 yarn-error.log
 testem.log
 /typings
@@ -70,13 +68,11 @@ package-lock.json
 /e2e/*.js
 !/e2e/protractor.conf.js
 /e2e/*.map
->>>>>>> Stashed changes
 
 # System Files
 .DS_Store
 Thumbs.db
-<<<<<<< Updated upstream
 
 stats.json
-=======
->>>>>>> Stashed changes
+node_modules
+
