@@ -1,5 +1,5 @@
 <div class="edit-form">
-  <nb-icon class="close" icon="close-outline" (click)="goBack()"></nb-icon>
+  <nb-icon class="close" icon="close-outline" (click)="back.emit()"></nb-icon>
   <form [formGroup]="articleForm"
         #f="ngForm"
         (ngSubmit)="onSubmit()"

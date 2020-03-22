@@ -13,10 +13,6 @@ const routes: Routes = [
       {
         path: '',
         component: SingleArticleContentComponent
-      },
-      {
-        path: 'edit',
-        component: SingleArticleEditComponent
       }
     ]
   }

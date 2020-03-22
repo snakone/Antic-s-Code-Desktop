@@ -65,7 +65,7 @@ export class ProfileContentComponent implements OnInit, OnDestroy {
     if (draft.status === 'Draft') {
       this.crafter.toaster('Editar un Draft',
                            `Para editar un Draft, vuélvelo a cargar
-                            cuando vayas a crear un nuevo Artículo`,
+                            cuando vayas a crear un Artículo`,
                            'info');
       return;
     }

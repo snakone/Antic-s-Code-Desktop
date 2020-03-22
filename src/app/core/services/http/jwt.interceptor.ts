@@ -31,8 +31,7 @@ export class JwtInterceptor implements HttpInterceptor {
         if (error.status === 0) { return; }
         this.errorService.saveError(error);
         if (error.status === 401) {
-          this.crafter.toaster('Token caducado', `No se pudo completar la operación.
-                                                  Hemos actualizado el Token`, 'info');
+          this.crafter.toaster('Token caducado', `Hemos actualizado el Token`, 'info');
           const id = this.ls.get('user');
           if (!id) { return throwError(error); }
           this.store.dispatch(UserActions.refreshToken({id}));

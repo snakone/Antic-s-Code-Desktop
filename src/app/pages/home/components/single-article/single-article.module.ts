@@ -21,13 +21,15 @@ import {
   NbProgressBarModule,
   NbTooltipModule
 } from '@nebular/theme';
+import { SingleArticleIntroComponent } from './components/single-article-intro/single-article-intro.component';
 
 @NgModule({
   declarations: [
     SingleArticleComponent,
     SingleArticleIndexComponent,
     SingleArticleContentComponent,
-    SingleArticleEditComponent
+    SingleArticleEditComponent,
+    SingleArticleIntroComponent
   ],
   imports: [
     CommonModule,

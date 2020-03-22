@@ -16,6 +16,7 @@ export class SingleArticleContentComponent implements OnInit, OnDestroy {
 
   draft: Article;
   private unsubscribe$ = new Subject<void>();
+  index = 0;
 
   constructor(private store: Store<AppState>) { }
 

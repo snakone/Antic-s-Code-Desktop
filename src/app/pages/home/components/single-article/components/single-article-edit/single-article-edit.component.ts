@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { User, Article } from '@app/shared/interfaces/interfaces';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CATEGORIES, LANGUAGES, TAGS, BADGES, LEVELS } from '@app/shared/shared.data';
 import { Subject } from 'rxjs';
-import { UserService, CrafterService } from '@app/core/services/services.index';
+import { UserService } from '@app/core/services/services.index';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.config';
@@ -20,6 +20,7 @@ import { takeUntil } from 'rxjs/operators';
 
 export class SingleArticleEditComponent implements OnInit, OnDestroy {
 
+  @Output() back = new EventEmitter<void>();
   draft: Article;
   user: User;
   articleForm: FormGroup;
@@ -33,8 +34,7 @@ export class SingleArticleEditComponent implements OnInit, OnDestroy {
 
   constructor(private _user: UserService,
               private router: Router,
-              private store: Store<AppState>,
-              private location: Location) { }
+              private store: Store<AppState>) { }
 
   ngOnInit() {
     this.user = this.getUser();
@@ -127,10 +127,6 @@ export class SingleArticleEditComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(DraftActions.saveDraft({draft: this.draft}));
     this.router.navigateByUrl('/home/create');
-  }
-
-  goBack(): void {
-    this.location.back();
   }
 
   ngOnDestroy(): void {

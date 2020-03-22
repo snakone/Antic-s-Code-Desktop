@@ -1,4 +1,10 @@
 .create {
   padding-top: 1rem;
+  height: calc(100vh - var(--navbar-height));
 }
+
+.template {
+ padding: 1rem 0 2rem 0;
+}
+
 

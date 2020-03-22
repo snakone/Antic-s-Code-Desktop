@@ -6,6 +6,7 @@
 .hero {
   padding-left: 3rem !important;
   padding-top: 1rem;
+  height: calc(100vh - var(--navbar-height));
 }
 
 h1 {
@@ -54,6 +55,7 @@ h3 {
 
 .picture {
   display: flex;
+  margin-bottom: 1.5rem;
 
   & img {
     margin: 0;
