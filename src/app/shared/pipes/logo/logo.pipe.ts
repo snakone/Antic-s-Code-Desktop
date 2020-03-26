@@ -7,6 +7,7 @@ export class LogoPipe implements PipeTransform {
     if (!value) { return ''; }
     if (value === 'Nodejs') { value = 'node'; }
     if (value === 'MongoDB') { value = 'mongo'; }
+    if (value === 'Antic\'s') { value = 'antics'; }
     return `${value.toLowerCase()}-logo.png`;
   }
 }

@@ -69,7 +69,7 @@ export class SingleArticleEditComponent implements OnInit, OnDestroy {
             title: new FormControl(this.draft.title || null,
                                          [Validators.required,
                                           Validators.minLength(10),
-                                          Validators.maxLength(30)]),
+                                          Validators.maxLength(35)]),
                 author: new FormControl({ value: this.user.name,
                                           disabled: true
                                        },[Validators.required]),

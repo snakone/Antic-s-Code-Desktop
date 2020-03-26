@@ -21,7 +21,8 @@ export const CATEGORIES: string[] = [
   'Angular',
   'Nodejs',
   'MongoDB',
-  'Android'
+  'Android',
+  'Antic\'s'
 ];
 
 export const LANGUAGES: string[] = [
@@ -48,7 +49,8 @@ export const TAGS: string[] = [
   'Database',
   'Mobile',
   'Ionic',
-  'Config'
+  'Config',
+  'Antic\'s Code'
 ];
 
 export const LEVELS: string[] = [

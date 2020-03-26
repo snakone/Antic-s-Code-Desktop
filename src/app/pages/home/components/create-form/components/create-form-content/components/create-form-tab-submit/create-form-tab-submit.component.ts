@@ -57,7 +57,7 @@ export class CreateFormTabSubmitComponent implements OnInit {
     this.articleForm = new FormGroup({
             title: new FormControl(null, [Validators.required,
                                           Validators.minLength(10),
-                                          Validators.maxLength(30)]),
+                                          Validators.maxLength(35)]),
                 author: new FormControl({ value: this.user.name,
                                           disabled: true
                                        },[Validators.required]),

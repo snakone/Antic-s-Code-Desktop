@@ -18,7 +18,6 @@ import * as DraftActions from '@app/core/ngrx/actions/draft.actions';
 export class CreateIndexComponent implements OnInit {
 
   markdown: string = '';
-  draft: Article;
   private unsubscribe$ = new Subject<void>();
 
   constructor(private creator: CreatorService,
@@ -39,7 +38,6 @@ export class CreateIndexComponent implements OnInit {
     .pipe(takeUntil(this.unsubscribe$))
      .subscribe((res: Article) => {
        if (res) {
-         this.draft = res;
          this.markdown = res.message;
        }
      })
@@ -47,8 +45,6 @@ export class CreateIndexComponent implements OnInit {
 
   public goNext(): void {
     if (this.markdown.length < 20) { return; }
-    // this.draft.message = this.markdown;
-    // this.store.dispatch(DraftActions.saveDraft({draft: this.draft}));
     this.router.navigateByUrl('/home/create-confirm');
   }
 
