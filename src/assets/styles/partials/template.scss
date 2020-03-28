@@ -23,9 +23,12 @@
     font-size: 16px;
     color: #1a1a1a;
     padding-left: 20px;
-    list-style: disc;
     margin-left: 0;
     margin-bottom: 10px;
+  }
+
+  ul {
+    list-style: disc;
   }
 
   ul li, ol li {
@@ -36,6 +39,7 @@
   h2 {
     line-height: 1.2;
     font-size: 24px;
+    position: relative;
   }
 
   h2:before {
@@ -45,6 +49,17 @@
     padding-top: 44px;
     margin-bottom: 40px;
     box-sizing: inherit;
+  }
+
+  h2:after {
+    content: "";
+    position: absolute;
+    height: 4px;
+    width: 2rem;
+    left: 2px;
+    bottom: -4px;
+    background: var(--primary-color);
+    border-radius: 4px;
   }
 
   h3 { font-size: 1.17rem }
@@ -84,6 +99,10 @@
     }
   }
 
+  strong {
+    font-size: inherit;
+  }
+
   code {
     font-size: 1em;
     border-top: 0;
@@ -111,7 +130,7 @@
     margin-bottom: -1px;
     border: none;
     border-bottom: 1px solid #ececec;
-    margin-top: 30px;
+    margin-top: 45px;
     box-sizing: content-box;
   }
 }

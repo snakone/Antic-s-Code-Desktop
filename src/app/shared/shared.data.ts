@@ -22,6 +22,7 @@ export const CATEGORIES: string[] = [
   'Nodejs',
   'MongoDB',
   'Android',
+  'Design',
   'Antic\'s'
 ];
 
