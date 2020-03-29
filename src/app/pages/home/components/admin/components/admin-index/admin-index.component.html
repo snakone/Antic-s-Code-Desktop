@@ -1,4 +1,4 @@
-<div class="index-content">
+<div class="index-content" *ngIf="!draft">
   <h3>Administración</h3>
   <p>
     Como autor de esta aplicación, es un placer que estés aquí para ayudarme con
@@ -25,5 +25,18 @@
       leerlo por encima y decidir en base a ello.
     </p>
   </div>
+</div>
 
+<div class="markdown" *ngIf="draft">
+  <textarea nbInput
+            fullWidth
+            [(ngModel)]="draft.message">
+  </textarea>
+
+  <button nbButton
+          status="danger"
+          (click)="updateMessage()"
+          [disabled]="draft.message.length < 20">
+          Actualizar
+  </button>
 </div>

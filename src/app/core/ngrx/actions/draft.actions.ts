@@ -67,3 +67,7 @@ props<{ error: string }>());
 // REMOVE DRAFT
 export const removeDraft =
 createAction('[Drafts API] Remove Draft');
+
+// RESET PREVIEW DRAFT
+export const resetPreviewDraft =
+createAction('[Drafts API] Reset Preview Draft');

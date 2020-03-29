@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import * as DraftActions from '@app/core/ngrx/actions/draft.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/app.config';
 
 @Component({
   selector: 'app-admin',
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.scss']
 })
 
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit,OnDestroy {
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() { }
+
+  ngOnDestroy() {
+    this.store.dispatch(DraftActions.resetPreviewDraft());
+  }
 
 }

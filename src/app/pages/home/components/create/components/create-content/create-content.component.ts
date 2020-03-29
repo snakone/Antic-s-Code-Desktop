@@ -59,6 +59,13 @@ export class CreateContentComponent implements OnInit {
         debounceTime(20000),
         mergeMap((res: string) => {
           this.draft.message = res;
+          if (this.draft.status === 'Approved') {
+            this.loading = false;
+            this.store.dispatch(
+              DraftActions.saveDraft({draft: this.draft})
+            );
+            return of({ok: false});
+          }
           return this._draft.updateDraftMessage(
             res,
             this.draft._id

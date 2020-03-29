@@ -108,6 +108,14 @@ const featureReducer = createReducer(
       error: null,
       draft: null
     }
+  )),
+  // RESET PREVIEW DRAFT
+  on(DraftActions.resetPreviewDraft, state => (
+    {
+      ...state,
+      previewArticle: null,
+      previewArticleLoaded: false,
+    }
   ))
 );
 

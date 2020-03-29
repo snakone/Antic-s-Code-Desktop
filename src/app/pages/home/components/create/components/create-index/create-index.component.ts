@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Article } from '@app/shared/interfaces/interfaces';
-import * as DraftActions from '@app/core/ngrx/actions/draft.actions';
 
 @Component({
   selector: 'app-create-index',

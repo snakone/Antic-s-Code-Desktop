@@ -37,6 +37,10 @@ export class ArticlesService {
     return this.http.post(this.API_ARTICLES, article);
   }
 
+  public updateArticleMessage(message: string, id: string): Observable<ArticleResponse> {
+    return this.http.put(this.API_ARTICLES + 'message/' + id, {message});
+  }
+
   public resetPage(): void {
     this.page = 0;
   }

@@ -8,6 +8,7 @@ import { PublishArticleComponent } from './publish-article/publish-article.compo
   declarations: [
     LoadDraftComponent,
     PublishArticleComponent
+
   ],
   imports: [
     CommonModule,

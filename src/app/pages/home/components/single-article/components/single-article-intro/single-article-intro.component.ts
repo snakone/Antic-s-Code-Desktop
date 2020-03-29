@@ -14,7 +14,6 @@ export class SingleArticleIntroComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

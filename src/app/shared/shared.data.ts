@@ -23,6 +23,8 @@ export const CATEGORIES: string[] = [
   'MongoDB',
   'Android',
   'Design',
+  'GO',
+  'Python',
   'Antic\'s'
 ];
 
@@ -36,7 +38,9 @@ export const LANGUAGES: string[] = [
   'JSON',
   'Terminal',
   'Android',
-  'Kotlin'
+  'Kotlin',
+  'GO',
+  'Python'
 ];
 
 export const TAGS: string[] = [
@@ -51,7 +55,7 @@ export const TAGS: string[] = [
   'Mobile',
   'Ionic',
   'Config',
-  'Antic\'s Code'
+  'Antic\'s'
 ];
 
 export const LEVELS: string[] = [
