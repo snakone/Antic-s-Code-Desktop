@@ -8,7 +8,7 @@ import * as fromUsers from '@core/ngrx/reducers/user.reducer';
 const DEV = 'http://localhost:3000/';
 const PRE = 'http://192.168.1.97:3000/';
 const PROD = 'https://antics-code.herokuapp.com/';
-const APP_VERSION = '0.4.3';
+const APP_VERSION = '0.4.4';
 export const URI = 'https://anticscode.netlify.com';
 
 export interface AppState {

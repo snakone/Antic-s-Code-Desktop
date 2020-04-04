@@ -30,7 +30,7 @@ export class UserService {
   }
 
   public getUserById(id: string): Observable<UserResponse> {
-    return this.http.get(this.API_USERS + `/${id}`);
+    return this.http.get(APP_CONSTANTS.END_POINT + `user/${id}`);
   }
 
   public refreshToken(id: string): Observable<UserResponse> {
