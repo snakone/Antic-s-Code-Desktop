@@ -25,6 +25,7 @@ export const CATEGORIES: string[] = [
   'Design',
   'GO',
   'Python',
+  'Git',
   'Antic\'s'
 ];
 
@@ -55,6 +56,7 @@ export const TAGS: string[] = [
   'Mobile',
   'Ionic',
   'Config',
+  'Git',
   'Antic\'s'
 ];
 
