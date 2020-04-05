@@ -17,12 +17,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
             "assets": [
-              "src/assets",
-              "src/favicon.ico",
-              "src/favicon.png",
-              "src/favicon.icns",
-              "src/favicon.256x256.png",
-              "src/favicon.512x512.png"
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss",
@@ -39,7 +34,10 @@
               "./node_modules/prismjs/components/prism-json.min.js",
               "./node_modules/prismjs/components/prism-kotlin.min.js",
               "./node_modules/prismjs/components/prism-markup.min.js",
-              "./node_modules/prismjs/components/prism-typescript.min.js"
+              "./node_modules/prismjs/components/prism-typescript.min.js",
+              "./node_modules/prismjs/components/prism-git.min.js",
+              "./node_modules/prismjs/components/prism-go.min.js",
+              "./node_modules/prismjs/components/prism-python.min.js"
             ],
             "customWebpackConfig": {
               "path": "./angular.webpack.js"

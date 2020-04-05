@@ -33,7 +33,7 @@ function createWindow(): BrowserWindow {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
     },
-    icon: path.join(__dirname, 'src/icon.png')
+    icon: path.join(__dirname, 'src/assets/icons/icon.png')
   });
 
   if (serve) {
