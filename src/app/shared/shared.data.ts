@@ -1,4 +1,4 @@
-import { SocialIcon, MenuItem, StatusButton, CheckStatus, CheckStatusList } from "./interfaces/interfaces";
+import { SocialIcon, MenuItem, StatusButton, CheckStatus, CheckStatusList, NotificationPayload } from "./interfaces/interfaces";
 
 export const SOCIALMEDIA: SocialIcon[] = [
   { name: 'github', color: 'basic' },
@@ -127,5 +127,15 @@ export const CHECKSTATUS: CheckStatusList[] = [
     icon: 'file-outline'
   }
 ];
+
+export const PUBLISH_PUSH: NotificationPayload = {
+  body: 'Nuevo Artículo Publicado',
+  requireInteraction: true,
+  actions: [
+    { action: 'explore', title: 'Ver Artículo' }
+  ],
+  broadcast: true,
+  data: {}
+};
 
 

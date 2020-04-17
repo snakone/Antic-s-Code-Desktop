@@ -9,7 +9,8 @@ import {
   UserService,
   ArticlesService,
   CrafterService,
-  DraftsService
+  DraftsService,
+  PushService
   } from './services.index';
 
 @NgModule({
@@ -24,7 +25,8 @@ import {
     UserService,
     ArticlesService,
     CrafterService,
-    DraftsService
+    DraftsService,
+    PushService
   ]
 })
 

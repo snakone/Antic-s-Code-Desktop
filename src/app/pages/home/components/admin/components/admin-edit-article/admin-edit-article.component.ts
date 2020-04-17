@@ -1,13 +1,13 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { Article, ArticleResponse } from '@app/shared/interfaces/interfaces';
+import { Article, ArticleResponse, NotificationPayload } from '@app/shared/interfaces/interfaces';
 import { Subject, of } from 'rxjs';
-import { takeUntil, switchMap, tap } from 'rxjs/operators';
+import { takeUntil, switchMap } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { DraftsService, CrafterService } from '@app/core/services/services.index';
+import { DraftsService, CrafterService, PushService } from '@app/core/services/services.index';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CHECKSTATUS } from '@app/shared/shared.data';
+import { CHECKSTATUS, PUBLISH_PUSH } from '@app/shared/shared.data';
 import { Store } from '@ngrx/store';
-import { AppState } from '@app/app.config';
+import { AppState, URI } from '@app/app.config';
 import * as DraftActions from '@app/core/ngrx/actions/draft.actions';
 import * as remote from 'remote-file-size';
 
@@ -29,7 +29,8 @@ export class AdminEditArticleComponent implements OnInit {
               private store: Store<AppState>,
               private router: Router,
               private crafter: CrafterService,
-              private zone: NgZone) { }
+              private zone: NgZone,
+              private sw: PushService) { }
 
   ngOnInit() {
     this.getDraftBySlug();
@@ -75,6 +76,9 @@ export class AdminEditArticleComponent implements OnInit {
           this.store.dispatch(DraftActions.removeDraft());
           this.crafter.toaster('Artículo publicado', '!Genial!', 'success');
           this.router.navigateByUrl('home/admin');
+          this.sw.sendNotification(
+            this.setNotification(PUBLISH_PUSH, res.article)
+          ).subscribe();
         }
       });
     } else {
@@ -106,6 +110,15 @@ export class AdminEditArticleComponent implements OnInit {
         });
       })
     });
+  }
+
+  private setNotification(payload: NotificationPayload,
+                          article: Article): NotificationPayload {
+    payload.image = article.cover;
+    payload.data.url = `${URI}/article/${article.slug}`;
+    payload.body = payload.body
+                   .concat(`\n\n${article.title}\n\nEscrito por ${article.author}`);
+    return payload;
   }
 
   ngOnDestroy() {
