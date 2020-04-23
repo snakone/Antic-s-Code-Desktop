@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DraftCardComponent } from './draft-card/draft-card.component';
 import { SharedModule } from '@shared/shared.module';
-import { NbButtonModule } from '@nebular/theme';
+import { NbButtonModule, NbPopoverModule } from '@nebular/theme';
 import { BasicCardComponent } from './basic-card/basic-card.component';
 
 @NgModule({
@@ -13,7 +13,8 @@ import { BasicCardComponent } from './basic-card/basic-card.component';
   imports: [
     CommonModule,
     SharedModule,
-    NbButtonModule
+    NbButtonModule,
+    NbPopoverModule
   ],
   exports: [
     DraftCardComponent,

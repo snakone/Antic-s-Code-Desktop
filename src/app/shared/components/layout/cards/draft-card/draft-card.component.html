@@ -15,6 +15,15 @@
                   [status]="draft.status | status">
             {{ draft.status }}
           </button>
+          <button *ngIf="!admin"
+                  class="download"
+                  nbButton
+                  outline
+                  size="tiny"
+                  status="info"
+                  (click)="download(); $event.stopPropagation()">
+            <nb-icon icon="download-outline"></nb-icon>
+          </button>
         </span>
      </div>
 </div>

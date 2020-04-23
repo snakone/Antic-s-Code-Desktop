@@ -77,7 +77,7 @@ export class AdminEditArticleComponent implements OnInit {
           this.crafter.toaster('Artículo publicado', '!Genial!', 'success');
           this.router.navigateByUrl('home/admin');
           this.sw.sendNotification(
-            this.setNotification(PUBLISH_PUSH, res.article)
+            this.setNotification(Object.assign({}, PUBLISH_PUSH), res.article)
           ).subscribe();
         }
       });
@@ -117,7 +117,7 @@ export class AdminEditArticleComponent implements OnInit {
     payload.image = article.cover;
     payload.data.url = `${URI}/article/${article.slug}`;
     payload.body = payload.body
-                   .concat(`\n\n${article.title}\n\nEscrito por ${article.author}`);
+                   .concat(`.\n${article.title}\nEscrito por ${article.author}.`);
     return payload;
   }
 
