@@ -1,15 +1,14 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { User, Article } from '@app/shared/interfaces/interfaces';
+import { User, Article } from '@shared/interfaces/interfaces';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CATEGORIES, LANGUAGES, TAGS, BADGES, LEVELS } from '@app/shared/shared.data';
+import { CATEGORIES, LANGUAGES, TAGS, BADGES, LEVELS } from '@shared/shared.data';
 import { Subject } from 'rxjs';
 import { UserService } from '@app/core/services/services.index';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.config';
-import { Location } from '@angular/common';
-import * as fromDrafts from '@app/core/ngrx/selectors/draft.selectors';
-import * as DraftActions from '@app/core/ngrx/actions/draft.actions';
+import * as fromDrafts from '@core/ngrx/selectors/draft.selectors';
+import * as DraftActions from '@core/ngrx/actions/draft.actions';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -32,9 +31,11 @@ export class SingleArticleEditComponent implements OnInit, OnDestroy {
   imagePattern = '^.+\.(([pP][nN][gG])|([jJ][pP][gG]))$';  // Png, Jpg
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private _user: UserService,
-              private router: Router,
-              private store: Store<AppState>) { }
+  constructor(
+    private _user: UserService,
+    private router: Router,
+    private store: Store<AppState>
+  ) { }
 
   ngOnInit() {
     this.user = this.getUser();
@@ -66,31 +67,37 @@ export class SingleArticleEditComponent implements OnInit, OnDestroy {
 
   private createArticleForm(): void {
     this.articleForm = new FormGroup({
-            title: new FormControl(this.draft.title || null,
-                                         [Validators.required,
-                                          Validators.minLength(10),
-                                          Validators.maxLength(35)]),
-                author: new FormControl({ value: this.user.name,
-                                          disabled: true
-                                       },[Validators.required]),
-         category: new FormControl(this.draft.category || null,
-                                         [Validators.required]),
-             tags: new FormControl(this.draft.tags || null,
-                                         [Validators.required,
-                                          this.selectValidator(3).bind(this)]),
-           badges: new FormControl(this.draft.badges || null,
-                                         [Validators.required,
-                                          this.selectValidator(2).bind(this)]),
-          summary: new FormControl(this.draft.summary || null, [
-                                          Validators.required,
-                                          Validators.minLength(100),
-                                          Validators.maxLength(600)]),
-           level: new FormControl(this.draft.level || null,
-                                         [Validators.required]),
-            cover: new FormControl(this.draft.cover || null,
-                                         [Validators.required,
-                                          Validators.minLength(4),
-                                          Validators.pattern(this.imagePattern)])
+      title: new FormControl(this.draft.title || null, [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(35)
+      ]),
+      author: new FormControl({ value: this.user.name, disabled: true }, [
+        Validators.required
+      ]),
+      category: new FormControl(this.draft.category || null, [
+        Validators.required
+      ]),
+      tags: new FormControl(this.draft.tags || null, [
+        Validators.required,
+        this.selectValidator(3).bind(this)
+      ]),
+      badges: new FormControl(this.draft.badges || null, [
+        Validators.required,
+        this.selectValidator(2).bind(this)]),
+      summary: new FormControl(this.draft.summary || null, [
+        Validators.required,
+        Validators.minLength(100),
+        Validators.maxLength(600)
+      ]),
+      level: new FormControl(this.draft.level || null, [
+        Validators.required
+      ]),
+      cover: new FormControl(this.draft.cover || null, [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.pattern(this.imagePattern)
+      ])
     });
   }
 

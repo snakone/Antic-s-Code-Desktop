@@ -1,14 +1,14 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { Article, ArticleResponse, NotificationPayload } from '@app/shared/interfaces/interfaces';
+import { Article, ArticleResponse, NotificationPayload } from '@shared/interfaces/interfaces';
 import { Subject, of } from 'rxjs';
 import { takeUntil, switchMap } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { DraftsService, CrafterService, PushService } from '@app/core/services/services.index';
+import { DraftsService, CrafterService, PushService } from '@core/services/services.index';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CHECKSTATUS, PUBLISH_PUSH } from '@app/shared/shared.data';
 import { Store } from '@ngrx/store';
 import { AppState, URI } from '@app/app.config';
-import * as DraftActions from '@app/core/ngrx/actions/draft.actions';
+import * as DraftActions from '@core/ngrx/actions/draft.actions';
 import * as remote from 'remote-file-size';
 
 @Component({
@@ -24,13 +24,15 @@ export class AdminEditArticleComponent implements OnInit {
   check = CHECKSTATUS;
   public coverSize: string;
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private _draft: DraftsService,
-              private store: Store<AppState>,
-              private router: Router,
-              private crafter: CrafterService,
-              private zone: NgZone,
-              private sw: PushService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private _draft: DraftsService,
+    private store: Store<AppState>,
+    private router: Router,
+    private crafter: CrafterService,
+    private zone: NgZone,
+    private sw: PushService
+  ) { }
 
   ngOnInit() {
     this.getDraftBySlug();
@@ -38,21 +40,23 @@ export class AdminEditArticleComponent implements OnInit {
 
   private getDraftBySlug(): void {
     this.activatedRoute.paramMap
-    .pipe(switchMap((res: ParamMap) => {
+    .pipe(
+      takeUntil(this.unsubscribe$),
+      switchMap((res: ParamMap) => {
         const slug = res.get('slug');
-        if (!slug) { return of(null) }
         return this._draft.getDraftBySlug(slug);
-    }), takeUntil(this.unsubscribe$))
-    .subscribe((res: ArticleResponse) => {
-      if (res.ok) {
-        this.draft = res.draft;
+      })
+    )
+    .subscribe((res: Article) => {
+        this.draft = res;
         this.getCoverSize(this.draft.cover);
-       }
-    } , (err: HttpErrorResponse) => console.log(err));
+    });
   }
 
   public previewArticle(): void {
-    this.store.dispatch(DraftActions.savePreviewArticle({article: this.draft}));
+    this.store.dispatch(
+      DraftActions.savePreviewArticle({article: this.draft})
+    );
     this.router.navigateByUrl('home/admin/preview');
   }
 
@@ -71,25 +75,21 @@ export class AdminEditArticleComponent implements OnInit {
     if (ok) {
       this._draft.publishDraft(this.draft)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((res: ArticleResponse) => {
-        if (res.ok) {
+      .subscribe((res: Article) => {
           this.store.dispatch(DraftActions.removeDraft());
           this.crafter.toaster('Artículo publicado', '!Genial!', 'success');
           this.router.navigateByUrl('home/admin');
           this.sw.sendNotification(
-            this.setNotification(Object.assign({}, PUBLISH_PUSH), res.article)
+            this.setNotification(Object.assign({}, PUBLISH_PUSH), res)
           ).subscribe();
-        }
       });
     } else {
       this._draft.updateDraft(this.draft)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((res: ArticleResponse) => {
-        if (res.ok) {
-          this.store.dispatch(DraftActions.removeDraft());
-          this.crafter.toaster('Artículo actualizado', '!Bien!', 'success');
-          this.router.navigateByUrl('home/admin');
-        }
+      .subscribe(_ => {
+        this.store.dispatch(DraftActions.removeDraft());
+        this.crafter.toaster('Artículo actualizado', '!Bien!', 'success');
+        this.router.navigateByUrl('home/admin');
       });
     }
   }

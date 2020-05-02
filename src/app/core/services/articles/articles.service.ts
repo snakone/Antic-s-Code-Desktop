@@ -2,47 +2,34 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from '../http/http.service';
 import { APP_CONSTANTS } from '@app/app.config';
+import { ArticleResponse, Article } from '@shared/interfaces/interfaces';
+import { filter, map } from 'rxjs/operators';
 import { environment } from '@environments/environment';
-import { ArticleResponse, Article } from '@app/shared/interfaces/interfaces';
 
 @Injectable()
 
 export class ArticlesService {
 
-  readonly API_ARTICLES = APP_CONSTANTS.END_POINT + 'articles/';
-  public page = 0;
+  readonly API_ARTICLES = environment.api + 'articles/';
 
-  constructor(private http: HttpService) {
-      if (!environment.production) { console.log('ArticlesService'); }
+  constructor(private http: HttpService) { }
+
+  public getArticleBySlug(slug: string): Observable<Article> {
+    return this.http
+      .get<ArticleResponse>(environment.api + 'article/' + slug)
+      .pipe(
+        filter(res => res && !!res.ok),
+        map(_ => _.article)
+      );
   }
 
-  public getArticles(limit?: number): Observable<ArticleResponse> {
-    this.page++;
-    return this.http.get(this.API_ARTICLES + '?page=' + this.page + '&limit=' + limit);
-  }
-
-  public getArticlesByUser(): Observable<ArticleResponse> {
-    return this.http.get(this.API_ARTICLES + 'user');
-  }
-
-  public getArticleBySlug(slug: string): Observable<ArticleResponse> {
-    return this.http.get(APP_CONSTANTS.END_POINT + 'article/' + slug);
-  }
-
-  public getArticlesList(): Observable<ArticleResponse> {
-    return this.http.get(this.API_ARTICLES + 'list');
-  }
-
-  public createArticle(article: Article): Observable<ArticleResponse> {
-    return this.http.post(this.API_ARTICLES, article);
-  }
-
-  public updateArticleMessage(message: string, id: string): Observable<ArticleResponse> {
-    return this.http.put(this.API_ARTICLES + 'message/' + id, {message});
-  }
-
-  public resetPage(): void {
-    this.page = 0;
+  public getArticlesList(): Observable<Article[]> {
+    return this.http
+      .get<ArticleResponse>(this.API_ARTICLES + 'list')
+      .pipe(
+        filter(res => res && !!res.ok),
+        map(_ => _.articles)
+      );
   }
 
 }

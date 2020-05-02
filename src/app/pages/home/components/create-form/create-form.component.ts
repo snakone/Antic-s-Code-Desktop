@@ -32,13 +32,11 @@ export class CreateFormComponent implements OnInit, OnDestroy {
   }
 
   private checkUserDraft(): void {
-    this._draft.getDraftsByUser('Draft')
+    this._draft.getContentByUser('Draft')
     .pipe(takeUntil(this.unsubscribe$))
      .subscribe((res: ArticleResponse) => {
-       if (res.ok) {
         this.store.dispatch(DraftActions.saveDraft({draft: res.drafts[0]}));
         this.store.dispatch(DraftActions.showDraftDialog({show: true}));
-       }
      });
   }
 

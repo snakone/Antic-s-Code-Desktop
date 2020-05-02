@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserService, DraftsService } from '@app/core/services/services.index';
-import { User, Article, ArticleResponse } from '@app/shared/interfaces/interfaces';
+import { UserService, DraftsService } from '@core/services/services.index';
+import { User, Article, ArticleResponse } from '@shared/interfaces/interfaces';
 import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
-import { STATUSBUTTONS } from '@app/shared/shared.data';
+import { takeUntil } from 'rxjs/operators';
+import { STATUSBUTTONS } from '@shared/shared.data';
 import { Router } from '@angular/router';
 import { CrafterService } from '@core/services/crafter/crafter.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.config';
-import * as DraftActions from '@app/core/ngrx/actions/draft.actions';
+import * as DraftActions from '@core/ngrx/actions/draft.actions';
 
 @Component({
   selector: 'app-profile-content',
@@ -24,11 +24,13 @@ export class ProfileContentComponent implements OnInit, OnDestroy {
   buttons = STATUSBUTTONS;
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private _user: UserService,
-              private _draft: DraftsService,
-              private router: Router,
-              private crafter: CrafterService,
-              private store: Store<AppState>) { }
+  constructor(
+    private _user: UserService,
+    private _draft: DraftsService,
+    private router: Router,
+    private crafter: CrafterService,
+    private store: Store<AppState>
+  ) { }
 
   ngOnInit() {
     this.user = this.getUser();
@@ -40,13 +42,11 @@ export class ProfileContentComponent implements OnInit, OnDestroy {
   }
 
   private getDraftListByUser(): void {
-    this._draft.getDraftsByUser()
+    this._draft.getContentByUser()
     .pipe(takeUntil(this.unsubscribe$))
     .subscribe((res: ArticleResponse) => {
-      if (res.ok) {
-        this.result = [...res.drafts, ...res.articles];
-        this.filteredResult = this.result;
-      }
+      this.result = [...res.drafts, ...res.articles];
+      this.filteredResult = this.result;
     });
   }
 

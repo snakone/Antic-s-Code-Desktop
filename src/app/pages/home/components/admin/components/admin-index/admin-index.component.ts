@@ -39,12 +39,10 @@ export class AdminIndexComponent implements OnInit {
 
   updateMessage(): void {
     this._draft.updateDraftMessage(this.draft.message, this.draft._id)
-    .subscribe((res: ArticleResponse) => {
-      if (res.ok) {
-        this.crafter.toaster('Mensaje actualizado', '!Bien!', 'success');
-        this.store.dispatch(DraftActions.resetPreviewDraft());
-        this.location.back();
-      }
+    .subscribe(_ => {
+      this.crafter.toaster('Mensaje actualizado', '!Bien!', 'success');
+      this.store.dispatch(DraftActions.resetPreviewDraft());
+      this.location.back();
     });
   }
 

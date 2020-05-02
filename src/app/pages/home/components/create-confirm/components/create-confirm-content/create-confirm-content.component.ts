@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Article, ArticleResponse, Link } from '@app/shared/interfaces/interfaces';
+import { Article, Link } from '@shared/interfaces/interfaces';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.config';
-import * as fromDrafts from '@app/core/ngrx/selectors/draft.selectors';
-import * as DraftActions from '@app/core/ngrx/actions/draft.actions';
-import { takeUntil } from 'rxjs/operators';
+import * as fromDrafts from '@core/ngrx/selectors/draft.selectors';
+import * as DraftActions from '@core/ngrx/actions/draft.actions';
+import { takeUntil, filter } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { CrafterService } from '@core/services/crafter/crafter.service';
-import { DraftsService } from '@app/core/services/drafts/drafts.service';
+import { DraftsService } from '@core/services/drafts/drafts.service';
 
 @Component({
   selector: 'app-create-confirm-content',
@@ -24,10 +24,12 @@ export class CreateConfirmContentComponent implements OnInit, OnDestroy {
   link: string[] = ['', ''];
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private store: Store<AppState>,
-              private router: Router,
-              private crafter: CrafterService,
-              private _draft: DraftsService) { }
+  constructor(
+    private store: Store<AppState>,
+    private router: Router,
+    private crafter: CrafterService,
+    private _draft: DraftsService
+  ) { }
 
   ngOnInit() {
     this.getArticleDraft();
@@ -35,12 +37,13 @@ export class CreateConfirmContentComponent implements OnInit, OnDestroy {
 
   private getArticleDraft(): void {
     this.store.select(fromDrafts.getDraft)
-    .pipe(takeUntil(this.unsubscribe$))
+    .pipe(
+      takeUntil(this.unsubscribe$),
+      filter(res => res && !!res)
+    )
      .subscribe((res: Article) => {
-       if (res) {
-         this.draft = res;
-         this.checkDraftLinks();
-       }
+        this.draft = res;
+        this.checkDraftLinks();
      })
   }
 
@@ -49,24 +52,20 @@ export class CreateConfirmContentComponent implements OnInit, OnDestroy {
     if (this.draft.status === 'Approved') {
       this._draft.unPublishDraft(this.draft)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((res: ArticleResponse) => {
-        if (res.ok) {
-          this.store.dispatch(DraftActions.removeDraft());
-          this.crafter.toaster('Artículo archivado', `Tu Artículo ha pasado a
-                                                      pendiente hasta que un moderador
-                                                      revise los cambios`, 'info');
-          this.router.navigateByUrl('/home');
-        }
+      .subscribe(_ => {
+        this.store.dispatch(DraftActions.removeDraft());
+        this.crafter.toaster('Artículo archivado', `Tu Artículo ha pasado a
+                                                    pendiente hasta que un moderador
+                                                    revise los cambios`, 'info');
+        this.router.navigateByUrl('/home');
       });
     } else {
       this._draft.updateDraft(this.draft)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((res: ArticleResponse) => {
-        if (res.ok) {
-          this.store.dispatch(DraftActions.removeDraft());
-          this.crafter.toaster('Artículo actualizado', '¡Genial!', 'success');
-          this.router.navigateByUrl('/home');
-        }
+      .subscribe(_ => {
+        this.store.dispatch(DraftActions.removeDraft());
+        this.crafter.toaster('Artículo actualizado', '¡Genial!', 'success');
+        this.router.navigateByUrl('/home');
       });
     }
   }
@@ -83,12 +82,12 @@ export class CreateConfirmContentComponent implements OnInit, OnDestroy {
     });
   }
 
-  addLink(): void {
+  public addLink(): void {
     if (this.inputs.length >= 2 || this.inputs.length < 1) { return; }
     this.inputs.push(this.inputs.length);
   }
 
-  removeLink(): void {
+  public removeLink(): void {
     this.inputs.splice(this.inputs.length -1, 1);
     this.name[1] = '';
     this.link[1] = ''
