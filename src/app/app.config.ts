@@ -5,9 +5,6 @@ import { InjectionToken } from '@angular/core';
 import * as fromDrafts from '@app/core/ngrx/reducers/draft.reducer';
 import * as fromUsers from '@core/ngrx/reducers/user.reducer';
 
-const DEV = 'http://localhost:3000/';
-const PRE = 'http://192.168.1.97:3000/';
-const PROD = 'https://antics-code.herokuapp.com/';
 const APP_VERSION = '0.5.0';
 export const URI = 'https://anticscode.netlify.com';
 
@@ -19,7 +16,6 @@ export interface AppState {
 export interface AppConfig {
   TITLE: string;
   DEFAULT_LANGUAGE: string;
-  END_POINT: string;
   APP_VERSION: string;
   THEME: string;
   PLATFORM: string;
@@ -28,7 +24,6 @@ export interface AppConfig {
 export const APP_CONSTANTS: AppConfig = {
   TITLE: 'Antic\'s Code Desktop',
   DEFAULT_LANGUAGE: 'es',
-  END_POINT: PROD,
   APP_VERSION,
   THEME: 'default',
   PLATFORM: 'Electron'

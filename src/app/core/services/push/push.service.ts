@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import { APP_CONSTANTS } from '@app/app.config';
 import { HttpService } from '../http/http.service';
 import { Observable } from 'rxjs';
-import { NotificationPayload, SWResponse } from '@app/shared/interfaces/interfaces';
+import { NotificationPayload, SWResponse } from '@shared/interfaces/interfaces';
+import { environment } from '@environments/environment';
 
 @Injectable()
 
 export class PushService {
 
-  readonly API_NOTIFICATION = APP_CONSTANTS.END_POINT + 'notification';
+  readonly API_NOTIFICATION = environment.api + 'notification';
 
   constructor(private http: HttpService) { }
 
-  public sendNotification(payload: NotificationPayload): Observable<SWResponse> {
+  public sendNotification(
+    payload: NotificationPayload
+  ): Observable<SWResponse> {
     return this.http.post(this.API_NOTIFICATION, {payload});
   }
 

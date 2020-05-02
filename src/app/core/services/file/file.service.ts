@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 const FileSaver = require('file-saver');
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 
 export class FileService {
 

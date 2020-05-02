@@ -4,20 +4,19 @@ import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { ComponentType } from '@angular/cdk/overlay';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
-import { environment } from '@environments/environment';
 
 @Injectable()
 
 export class CrafterService {
 
-  constructor(private ts: TranslateService,
-              private toastr: ToastrService,
-              private snackBar: MatSnackBar,
-              private matDialog: MatDialog) {
-      if (!environment.production) { console.log('CrafterService'); }
-  }
+  constructor(
+    private ts: TranslateService,
+    private toastr: ToastrService,
+    private snackBar: MatSnackBar,
+    private matDialog: MatDialog
+  ) { }
 
-  toaster<T>(title: string, message: string, action: string): ActiveToast<T> {
+  public toaster<T>(title: string, message: string, action: string): ActiveToast<T> {
     title = this.translate(title);
     message = this.translate(message);
     return this.toastr[action](message, title, {
@@ -26,13 +25,13 @@ export class CrafterService {
     });
   }
 
-  snack<T>(component: ComponentType<T>, duration?: number): MatSnackBarRef<T> {
+  public snack<T>(component: ComponentType<T>, duration?: number): MatSnackBarRef<T> {
     return this.snackBar.openFromComponent(component, {
       duration
     });
   }
 
-  dialog<T>(component: ComponentType<T>, data?: any) {
+  public dialog<T>(component: ComponentType<T>, data?: any) {
     return this.matDialog.open(component, {data});
   }
 

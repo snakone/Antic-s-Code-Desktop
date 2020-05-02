@@ -10,14 +10,14 @@ import { StorageService } from '@core/storage/storage.service';
 
 export class ErrorService {
 
-  readonly API_ERRORS = APP_CONSTANTS.END_POINT + 'errors/';
+  readonly API_ERRORS = environment.api + 'errors/';
 
-  constructor(private http: HttpService,
-              private ls: StorageService) {
-      if (!environment.production) { console.log('HttpErrorService'); }
-  }
+  constructor(
+    private http: HttpService,
+    private ls: StorageService
+  ) { }
 
-  saveError(err: Error | HttpErrorResponse): void {
+  public saveError(err: Error | HttpErrorResponse): void {
     const error = this.manageError(err);
     this.http.post(this.API_ERRORS, error).toPromise().then();
   }

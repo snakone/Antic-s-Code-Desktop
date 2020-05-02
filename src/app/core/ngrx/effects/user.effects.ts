@@ -12,10 +12,13 @@ import { Router } from '@angular/router';
 @Injectable()
 
 export class UserEffects {
-  constructor(private actions: Actions,
-              private user: UserService,
-              private ls: StorageService,
-              private router: Router) { }
+
+  constructor(
+    private actions: Actions,
+    private user: UserService,
+    private ls: StorageService,
+    private router: Router
+  ) { }
 
   // VERIFY TOKEN
   verifyTokenEffect$ = createEffect(() => this.actions
@@ -24,12 +27,9 @@ export class UserEffects {
       concatMap(() =>
       this.user.verifyToken()
         .pipe(
-          map((res: UserResponse) => {
-            if (res.ok) {
-              this.user.setUser(res.user);
+          map(user => {
               this.router.navigateByUrl('/home');
-              return UserActions.verifyTokenSuccess({user: res.user});
-            }
+              return UserActions.verifyTokenSuccess({ user });
           }),
           catchError(error =>
               of(UserActions.verifyTokenFailure({ error: error.message }))
@@ -47,12 +47,8 @@ export class UserEffects {
       this.user.refreshToken(action.id)
         .pipe(
           map((res: UserResponse) => {
-            if (res.ok) {
-              this.ls.setKey('token', res.token);
-              this.user.setUser(res.user);
-              this.router.navigateByUrl('/home');
-              return UserActions.refreshTokenSuccess({ user: res.user });
-            }
+            this.router.navigateByUrl('/home');
+            return UserActions.refreshTokenSuccess({ user: res.user });
           }),
           catchError(error =>
               of(UserActions.refreshTokenFailure({ error: error.message }))

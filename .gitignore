@@ -11,6 +11,7 @@
 # dependencies
 /node_modules
 /post_images
+/src/environments
 
 # profiling files
 chrome-profiler-events.json
@@ -23,10 +24,6 @@ src/**/*.js
 !src/karma.conf.js
 *.js.map
 
-# dependencies
-/node_modules
->>>>>>> Stashed changes
-
 # IDEs and editors
 /.idea
 .project
@@ -38,18 +35,11 @@ src/**/*.js
 
 # IDE - VSCode
 .vscode/*
-<<<<<<< Updated upstream
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history/*
-=======
 .vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
->>>>>>> Stashed changes
 
 # misc
 /.sass-cache
@@ -57,26 +47,16 @@ src/**/*.js
 /coverage
 /libpeerconnection.log
 npm-debug.log
-<<<<<<< Updated upstream
 yarn-error.log
 testem.log
 /typings
-=======
 testem.log
-/typings
-package-lock.json
 
 # e2e
 /e2e/*.js
 !/e2e/protractor.conf.js
 /e2e/*.map
->>>>>>> Stashed changes
 
 # System Files
 .DS_Store
 Thumbs.db
-<<<<<<< Updated upstream
-
-stats.json
-=======
->>>>>>> Stashed changes

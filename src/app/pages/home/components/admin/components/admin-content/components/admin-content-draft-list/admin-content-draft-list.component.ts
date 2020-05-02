@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Article, ArticleResponse } from '@app/shared/interfaces/interfaces';
-import { DraftsService } from '@app/core/services/drafts/drafts.service';
-import { STATUSBUTTONS } from '@app/shared/shared.data';
+import { Article } from '@shared/interfaces/interfaces';
+import { DraftsService } from '@core/services/drafts/drafts.service';
+import { STATUSBUTTONS } from '@shared/shared.data';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app.config';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,9 +19,10 @@ export class AdminContentDraftListComponent implements OnInit, OnDestroy {
   buttons = STATUSBUTTONS.filter(s => s.status !== 'success');
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private _draft: DraftsService,
-              private store: Store<AppState>,
-              private router: Router) { }
+  constructor(
+    private _draft: DraftsService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.getDraftList();
@@ -32,11 +31,9 @@ export class AdminContentDraftListComponent implements OnInit, OnDestroy {
   private getDraftList(): void {
     this._draft.getDrafts()
     .pipe(takeUntil(this.unsubscribe$))
-    .subscribe((res: ArticleResponse) => {
-      if (res.ok) {
-        this.drafts = res.drafts;
-        this.filteredDrafts = res.drafts;
-      }
+    .subscribe((res: Article[]) => {
+      this.drafts = res;
+      this.filteredDrafts = res;
     });
   }
 
