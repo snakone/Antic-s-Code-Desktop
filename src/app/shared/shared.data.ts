@@ -1,4 +1,11 @@
-import { SocialIcon, MenuItem, StatusButton, CheckStatus, CheckStatusList, NotificationPayload } from "./interfaces/interfaces";
+import {
+  SocialIcon,
+  MenuItem,
+  StatusButton,
+  CheckStatus,
+  CheckStatusList,
+  NotificationPayload
+} from "./interfaces/interfaces";
 
 export const SOCIALMEDIA: SocialIcon[] = [
   { name: 'github', color: 'basic' },
@@ -26,7 +33,8 @@ export const CATEGORIES: string[] = [
   'GO',
   'Python',
   'Git',
-  'Antic\'s'
+  'Antic\'s',
+  'Deno'
 ];
 
 export const LANGUAGES: string[] = [
