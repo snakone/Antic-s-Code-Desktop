@@ -27,13 +27,14 @@ function createWindow(): BrowserWindow {
     height,
     maxWidth: width,
     maxHeight: height,
-    minWidth: width,
-    minHeight: height,
+    minWidth: 1280,
+    minHeight: 720,
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
     },
-    icon: path.join(__dirname, 'src/assets/icons/icon.png')
+    icon: path.join(__dirname, 'src/assets/icons/icon.png'),
+    autoHideMenuBar: true
   });
 
   if (serve) {
