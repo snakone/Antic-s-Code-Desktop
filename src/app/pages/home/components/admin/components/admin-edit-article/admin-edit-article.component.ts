@@ -81,7 +81,7 @@ export class AdminEditArticleComponent implements OnInit {
           this.router.navigateByUrl('home/admin');
           this.sw.sendNotification(
             this.setNotification(Object.assign({}, PUBLISH_PUSH), res)
-          ).subscribe();
+          ).toPromise().then();
       });
     } else {
       this._draft.updateDraft(this.draft)
