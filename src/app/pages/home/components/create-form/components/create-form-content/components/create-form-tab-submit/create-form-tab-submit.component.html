@@ -80,7 +80,7 @@
                  multiple
                  [status]="badges.invalid ? 'danger' : 'success'">
         <nb-option *ngFor="let b of badgesList"
-                    [value]="b">{{ b }}
+                    [value]="b">{{ b | translate}}
         </nb-option>
       </nb-select>
     </div>
@@ -96,7 +96,7 @@
                  fullWidth
                  [status]="level.invalid ? 'danger' : 'success'">
         <nb-option *ngFor="let l of levelsList"
-                    [value]="l">{{ l }}
+                    [value]="l">{{ l | translate}}
         </nb-option>
       </nb-select>
     </div>

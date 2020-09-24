@@ -21,14 +21,61 @@
   ul, ol {
     margin-top: 20px;
     font-size: 16px;
-    color: #1a1a1a;
     padding-left: 20px;
     margin-left: 0;
     margin-bottom: 10px;
   }
 
   ul {
-    list-style: disc;
+    margin-left: 0;
+    padding-left: 0;
+    & li {
+      position: relative;
+      padding-left: 1.8rem;
+      list-style-type: none;
+      margin: .66rem auto;
+
+      &:not(.raw) {
+        &:before {
+          content: '';
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 5px;
+          height: 11px;
+          border-width: 0 2px 2px 0;
+          border-style: solid;
+          border-color: var(--primary-color-light);
+          transform-origin: bottom left;
+          transform: rotate(45deg);
+        }
+      }
+    }
+  }
+
+  ol {
+    list-style: none;
+    counter-reset: li;
+
+    & li {
+      counter-increment: li;
+      position: relative;
+      padding-left: 1.8rem;
+      list-style-type: none;
+      margin: .66rem auto;
+
+      &:before {
+        content: counter(li);
+        color: var(--primary-color-light);
+        width: 1em;
+        font-weight: bold;
+        display: block;
+        position: absolute;
+        left: 3px;
+        top: 0;
+      }
+    }
   }
 
   ul li, ol li {
