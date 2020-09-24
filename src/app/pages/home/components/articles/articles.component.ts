@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ArticlesService } from '@core/services/articles/articles.service';
 import { Article } from '@shared/interfaces/interfaces';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { ArticleResponse } from '@shared/interfaces/interfaces';
 
 @Component({
   selector: 'app-articles',

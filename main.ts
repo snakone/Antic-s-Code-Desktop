@@ -34,7 +34,7 @@ function createWindow(): BrowserWindow {
       allowRunningInsecureContent: (serve) ? true : false,
     },
     icon: path.join(__dirname, 'src/assets/icons/icon.png'),
-    autoHideMenuBar: true
+    autoHideMenuBar: (serve) ? false : true
   });
 
   if (serve) {

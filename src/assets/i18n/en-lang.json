@@ -1,9 +1,20 @@
 {
  "welcome": "Welcome",
- "web.dev": "Web Developer",
- "front.dev": "Frontend Developer",
- "back.dev": "Backend Developer",
- "full.dev": "Full-Stack Developer",
- "design.dev": "Designer",
- "design.web": "Web Designer"
+ "WEB.DEV": "Web Developer",
+ "FRONT.DEV": "Frontend Developer",
+ "BACK.DEV": "Backend Developer",
+ "FULL.DEV": "Full-Stack Developer",
+ "DESIGN.DEV": "Designer",
+ "DESIGN.WEB": "Web Designer",
+ "LEVEL": {
+  "ADVANCED": "Advanced",
+  "BASIC": "Basic",
+  "MEDIUM": "Medium",
+  "NAME": "Difficulty"
+ },
+ "BADGE": {
+  "HOT": "Hot",
+  "NEW": "New",
+  "PRO": "Prominent"
+ }
 }
