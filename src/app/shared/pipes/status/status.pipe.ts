@@ -7,7 +7,7 @@ export class StatusPipe implements PipeTransform {
     switch(value) {
       case 'Pending': return 'danger';
       case 'Draft': return 'warning';
-      case 'Hidden': return 'info';
+      case 'Hidden': return 'primary';
       case 'Approved': return 'success';
       default: return 'basic'
     }

@@ -1,14 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserResponse } from '@shared/interfaces/interfaces';
-import { HttpErrorResponse } from '@angular/common/http';
+import { UserResponse, User } from '@shared/interfaces/interfaces';
 import { takeUntil, finalize } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { StorageService } from '@core/storage/storage.service';
 import { LoginService } from '@core/services/login/login.service';
 import { UserService } from '@core/services/user/user.service';
-import { CrafterService } from '@core/services/crafter/crafter.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.config';
 import * as UserActions from '@core/ngrx/actions/user.actions';
@@ -26,12 +24,13 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   loading = false;
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private login: LoginService,
-              private userService: UserService,
-              private ls: StorageService,
-              private router: Router,
-              private crafter: CrafterService,
-              private store: Store<AppState>) { }
+  constructor(
+    private login: LoginService,
+    private userService: UserService,
+    private ls: StorageService,
+    private router: Router,
+    private store: Store<AppState>
+  ) { }
 
   ngOnInit() {
     this.createSignInForm();
@@ -52,26 +51,22 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$),
         finalize(() => this.loading = false)
         )
-      .subscribe((res: UserResponse) => {
-        if (res.ok) { this.handleSignIn(res); }
-      },
-        (err: HttpErrorResponse) => {
-          this.crafter.toaster('Error de acceso',
-                               'Comprueba tus credenciales',
-                               'error');
-          console.log(err);
-      });
+      .subscribe((res: UserResponse) => this.handleSignIn(res));
   }
 
   private createSignInForm(): void {
     this.signInForm = new FormGroup({
-       email: new FormControl(null, [Validators.required,
-                                     Validators.email,
-                                     Validators.minLength(5),
-                                     Validators.maxLength(35)]),
-    password: new FormControl(null, [Validators.required,
-                                     Validators.minLength(5),
-                                     Validators.maxLength(25)])});
+      email: new FormControl(null, [
+         Validators.required,
+         Validators.email,
+         Validators.minLength(5),
+         Validators.maxLength(35)
+      ]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(25)
+      ])});
   }
 
   private rememberMe(): void {
@@ -81,11 +76,9 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     if ( re && id) {
       this.userService.getUserById(id)
        .pipe(takeUntil(this.unsubscribe$))
-       .subscribe((res: UserResponse) => {
-            if (res.ok) {
-              this.signInForm.controls.email.setValue(res.user.email);
-              this.remember = true;
-          }
+       .subscribe((res: User) => {
+          this.signInForm.controls.email.setValue(res.email);
+          this.remember = true;
       });
     }
   }

@@ -1,50 +1,91 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from '../http/http.service';
-import { APP_CONSTANTS } from '@app/app.config';
 import { environment } from '@environments/environment';
-import { ArticleResponse, Article } from '@app/shared/interfaces/interfaces';
+import { ArticleResponse, Article } from '@shared/interfaces/interfaces';
+import { filter, map } from 'rxjs/operators';
 
 @Injectable()
 
 export class DraftsService {
 
-  readonly API_DRAFTS = APP_CONSTANTS.END_POINT + 'drafts/';
+  readonly API_DRAFTS = environment.api + 'drafts/';
+  readonly API_USER = environment.api + 'user/';
 
-  constructor(private http: HttpService) {
-      if (!environment.production) { console.log('DraftsService'); }
+  constructor(private http: HttpService) { }
+
+  public getDrafts(): Observable<Article[]> {
+    return this.http
+      .get<ArticleResponse>(this.API_DRAFTS)
+      .pipe(
+        filter(res => res && !!res.ok),
+        map(res => res.drafts)
+      );
   }
 
-  public getDrafts(): Observable<ArticleResponse> {
-    return this.http.get(this.API_DRAFTS);
+  public getContentByUser(
+    sort: string = 'any'
+  ): Observable<ArticleResponse> {
+    return this.http
+      .get<ArticleResponse>(this.API_USER + 'content' + '?sort=' + sort)
+      .pipe(
+        filter(res => res && !!res.ok)
+      );
   }
 
-  public getDraftsByUser(sort: string = 'any'): Observable<ArticleResponse> {
-    return this.http.get(this.API_DRAFTS + 'user' + '?sort=' + sort);
+  public getDraftBySlug(slug: string): Observable<Article> {
+    return this.http
+      .get<ArticleResponse>(this.API_DRAFTS + slug)
+      .pipe(
+        filter(res => res && !!res.ok),
+        map(res => res.draft)
+      );
   }
 
-  public getDraftBySlug(slug: string): Observable<ArticleResponse> {
-    return this.http.get(this.API_DRAFTS + slug);
+  public createDraft(draft: Article): Observable<Article> {
+    return this.http
+      .post<ArticleResponse>(this.API_DRAFTS, draft)
+      .pipe(
+        filter(res => res && !!res.ok),
+        map(res => res.draft)
+      );
   }
 
-  public createDraft(draft: Article): Observable<ArticleResponse> {
-    return this.http.post(this.API_DRAFTS, draft);
+  public updateDraft(draft: Article): Observable<Article> {
+    return this.http
+      .put<ArticleResponse>(this.API_DRAFTS, draft)
+      .pipe(
+        filter(res => res && !!res.ok),
+        map(res => res.draft)
+      );
   }
 
-  public updateDraft(draft: Article): Observable<ArticleResponse> {
-    return this.http.put(this.API_DRAFTS, draft);
+  public updateDraftMessage(
+    message: string, id: string
+  ): Observable<ArticleResponse> {
+    return this.http
+      .put<ArticleResponse>(this.API_DRAFTS + 'message/' + id, {message})
+      .pipe(
+        filter(res => res && !!res.ok)
+      );
   }
 
-  public updateDraftMessage(message: string, id: string): Observable<ArticleResponse> {
-    return this.http.put(this.API_DRAFTS + 'message/' + id, {message});
+  public publishDraft(draft: Article): Observable<Article> {
+    return this.http
+      .post<ArticleResponse>(this.API_DRAFTS + 'publish', draft)
+      .pipe(
+        filter(res => res && !!res.ok),
+        map(res => res.article)
+      );
   }
 
-  public publishDraft(draft: Article): Observable<ArticleResponse> {
-    return this.http.post(this.API_DRAFTS + 'publish', draft);
-  }
-
-  public unPublishDraft(draft: Article): Observable<ArticleResponse> {
-    return this.http.post(this.API_DRAFTS + 'unpublish', draft);
+  public unPublishDraft(draft: Article): Observable<Article> {
+    return this.http
+      .post<ArticleResponse>(this.API_DRAFTS + 'unpublish', draft)
+      .pipe(
+        filter(res => res && !!res.ok),
+        map(res => res.draft)
+      );
   }
 
 }

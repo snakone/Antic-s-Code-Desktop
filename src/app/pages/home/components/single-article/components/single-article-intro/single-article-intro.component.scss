@@ -1,0 +1,23 @@
+.intro {
+  padding-right: 2rem;
+
+  & p {
+    margin-top: 25px !important;
+  }
+}
+
+button {
+    width: 50.2%;
+    margin: 2.8rem 1.2rem 0 auto;
+    position: relative;
+    right: 3px;
+    display: block;
+}
+
+h3::before {
+ margin-top: -69px !important;
+}
+
+.success {
+  color: #00b887;
+}

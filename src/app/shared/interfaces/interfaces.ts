@@ -55,6 +55,9 @@ export interface ArticleResponse extends ServerResponse {
   drafts?: Article[];
 }
 
+// tslint:disable-next-line:no-empty-interface
+export interface SWResponse extends ServerResponse {}
+
 export interface User {
   _id?: string;
   name: string;
@@ -145,4 +148,27 @@ export class CustomError {
     this.author = author;
     this.platform = platform;
   }
+}
+
+export interface NotificationPayload {
+  title?: string;
+  body: string;
+  icon?: string;
+  vibrate?: number[];
+  requireInteraction?: boolean;
+  image?: string;
+  data?: NotificationData;
+  actions: NotificationAction[];
+  user?: string;
+  broadcast?: boolean;
+}
+
+interface NotificationData {
+  url?: string;
+  data?: any;
+}
+
+interface NotificationAction {
+  action: string;
+  title: string;
 }

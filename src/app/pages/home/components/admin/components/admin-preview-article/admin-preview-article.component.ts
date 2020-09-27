@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.config';
 import * as fromDrafts from '@app/core/ngrx/selectors/draft.selectors';
+import * as DraftActions from '@app/core/ngrx/actions/draft.actions';
 import { takeUntil } from 'rxjs/operators';
 import { Article } from '@app/shared/interfaces/interfaces';
 import { Subject } from 'rxjs';
@@ -37,6 +38,7 @@ export class AdminPreviewArticleComponent implements OnInit, OnDestroy {
 
   goBack(): void {
     this.location.back();
+    this.store.dispatch(DraftActions.resetPreviewDraft());
   }
 
   ngOnDestroy(): void {

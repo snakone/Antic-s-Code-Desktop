@@ -1,4 +1,11 @@
-import { SocialIcon, MenuItem, StatusButton, CheckStatus, CheckStatusList } from "./interfaces/interfaces";
+import {
+  SocialIcon,
+  MenuItem,
+  StatusButton,
+  CheckStatus,
+  CheckStatusList,
+  NotificationPayload
+} from "./interfaces/interfaces";
 
 export const SOCIALMEDIA: SocialIcon[] = [
   { name: 'github', color: 'basic' },
@@ -21,7 +28,14 @@ export const CATEGORIES: string[] = [
   'Angular',
   'Nodejs',
   'MongoDB',
-  'Android'
+  'Android',
+  'Design',
+  'GO',
+  'Python',
+  'Git',
+  'Antic\'s',
+  'Deno',
+  'PHP'
 ];
 
 export const LANGUAGES: string[] = [
@@ -34,7 +48,10 @@ export const LANGUAGES: string[] = [
   'JSON',
   'Terminal',
   'Android',
-  'Kotlin'
+  'Kotlin',
+  'GO',
+  'Python',
+  'PHP'
 ];
 
 export const TAGS: string[] = [
@@ -48,19 +65,21 @@ export const TAGS: string[] = [
   'Database',
   'Mobile',
   'Ionic',
-  'Config'
+  'Config',
+  'Git',
+  'Antic\'s'
 ];
 
 export const LEVELS: string[] = [
-  'Básico',
-  'Medio',
-  'Avanzado'
+  'LEVEL.BASIC',
+  'LEVEL.MEDIUM',
+  'LEVEL.ADVANCED'
 ];
 
 export const BADGES: string[] = [
-  'Nuevo',
-  'Destacado',
-  'Popular'
+  'BADGE.NEW',
+  'BADGE.PRO',
+  'BADGE.HOT'
 ];
 
 export const STATUSBUTTONS: StatusButton[] = [
@@ -118,5 +137,15 @@ export const CHECKSTATUS: CheckStatusList[] = [
     icon: 'file-outline'
   }
 ];
+
+export const PUBLISH_PUSH: NotificationPayload = {
+  body: 'Nuevo Artículo Publicado',
+  requireInteraction: true,
+  actions: [
+    { action: 'explore', title: 'Ver Artículo' }
+  ],
+  broadcast: true,
+  data: {}
+};
 
 

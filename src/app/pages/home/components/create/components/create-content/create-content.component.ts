@@ -7,19 +7,18 @@ import {
   exhaustMap,
   takeUntil,
   mergeMap,
-  tap}
+  tap,
+  filter}
 from 'rxjs/operators';
 
 import { of, Subject } from 'rxjs';
-import { Article } from '@app/shared/interfaces/interfaces';
-
+import { Article } from '@shared/interfaces/interfaces';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.config';
-import * as fromDrafts from '@app/core/ngrx/selectors/draft.selectors';
-import * as DraftActions from '@app/core/ngrx/actions/draft.actions';
+import * as fromDrafts from '@core/ngrx/selectors/draft.selectors';
+import * as DraftActions from '@core/ngrx/actions/draft.actions';
 import { ActivatedRoute } from '@angular/router';
-import { DraftsService } from '@app/core/services/drafts/drafts.service';
-import { ArticleResponse } from '@shared/interfaces/interfaces';
+import { DraftsService } from '@core/services/drafts/drafts.service';
 
 @Component({
   selector: 'app-create-content',
@@ -34,10 +33,12 @@ export class CreateContentComponent implements OnInit {
   loading = false;
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private creator: CreatorService,
-              private store: Store<AppState>,
-              public activatedRoute: ActivatedRoute,
-              private _draft: DraftsService) { }
+  constructor(
+    private creator: CreatorService,
+    private store: Store<AppState>,
+    public activatedRoute: ActivatedRoute,
+    private _draft: DraftsService
+  ) { }
 
   ngOnInit() {
     this.getArticleDraft();
@@ -59,29 +60,31 @@ export class CreateContentComponent implements OnInit {
         debounceTime(20000),
         mergeMap((res: string) => {
           this.draft.message = res;
+          if (this.draft.status === 'Approved') {
+            return of(null);
+          }
           return this._draft.updateDraftMessage(
             res,
             this.draft._id
           )
         })
-      ).subscribe((res: ArticleResponse) => {
-        if (res.ok) {
-          this.loading = false;
-          this.store.dispatch(
-            DraftActions.saveDraft({draft: this.draft})
-          );
-        }
+      ).subscribe(_ => {
+        this.loading = false;
+        this.store.dispatch(
+          DraftActions.saveDraft({draft: this.draft})
+        );
       });
   }
 
   private getArticleDraft(): void {
     this.store.select(fromDrafts.getDraft)
-    .pipe(takeUntil(this.unsubscribe$))
+    .pipe(
+      takeUntil(this.unsubscribe$),
+      filter(res => res && !!res)
+    )
      .subscribe((res: Article) => {
-       if (res) {
          this.draft = res;
          this.preview = res.message;
-       }
      })
   }
 

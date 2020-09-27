@@ -3,8 +3,7 @@
 }
 
 .markdown-tips {
-  margin-top: auto;
-
+  margin-top: .9rem;
   & p {
     & span {
       font-size: .8rem;
@@ -14,6 +13,11 @@
   code {
     position: relative;
     top: 5px;
+    margin-bottom: -1rem;
+
+    & pre {
+      height: 65px;
+    }
   }
 }
 

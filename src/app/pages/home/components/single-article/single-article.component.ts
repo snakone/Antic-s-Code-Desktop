@@ -10,7 +10,6 @@ export class SingleArticleComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

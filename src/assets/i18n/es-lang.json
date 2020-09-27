@@ -1,9 +1,20 @@
 {
   "welcome": "Bienvenido",
-  "web.dev": "Desarrollador Web",
-  "front.dev": "Desarrollador Frontend",
-  "back.dev": "Desarrollador Backend",
-  "full.dev": "Desarrollador Full-Stack",
-  "design.dev": "Diseñador",
-  "design.web": "Diseñador Web"
+  "WEB.dev": "Desarrollador Web",
+  "FRONT.DEV": "Desarrollador Frontend",
+  "BACK.DEV": "Desarrollador Backend",
+  "FULL.DEV": "Desarrollador Full-Stack",
+  "DESIGN.DEV": "Diseñador",
+  "DESIGN.WEB": "Diseñador Web",
+  "LEVEL": {
+    "ADVANCED": "Avanzado",
+    "BASIC": "Básico",
+    "MEDIUM": "Medio",
+    "NAME": "Dificultad"
+  },
+  "BADGE": {
+    "HOT": "Popular",
+    "NEW": "Nuevo",
+    "PRO": "Destacado"
+  }
 }

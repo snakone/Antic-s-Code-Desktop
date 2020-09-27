@@ -6,6 +6,7 @@
  .confirm {
    padding-left: 3rem !important;
    padding-top: 1rem;
+   height: calc(100vh - var(--navbar-height));
 
    & .flex {
      justify-content: space-between;
@@ -23,7 +24,7 @@
 
    & button {
       width: 46.5%;
-      margin: 2.666rem 2rem 2rem 0;
+      margin: 2.666rem 2rem 1rem 0;
       position: relative;
       left: 3px;
    }

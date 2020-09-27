@@ -6,6 +6,7 @@
 .hero {
   padding-left: 3rem !important;
   padding-top: 1rem;
+  height: calc(100vh - var(--navbar-height));
 }
 
 h1 {
@@ -74,10 +75,13 @@ h3 {
     margin-top: 1.3rem;
     list-style: none;
 
-    & li nb-icon {
-      position: relative;
-      top: 1px;
-      margin-right: .4rem;
+    & li {
+      padding-left: 1rem;
+      & nb-icon {
+        position: relative;
+        top: 1px;
+        margin-right: .4rem;
+      }
     }
   }
 

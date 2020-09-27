@@ -9,6 +9,7 @@
 
 .preview {
   padding-top: 1rem;
+  padding-left: 3rem !important;
   & h1 {
     font-size: 3rem;
     color: var(--primary-color);
@@ -27,7 +28,7 @@
 .loading {
   position: absolute;
   bottom: calc(var(--navbar-height) + .6rem);
-  right: .8rem;
+  right: 1.2rem;
 
   & nb-icon {
     font-size: 2.2rem;
