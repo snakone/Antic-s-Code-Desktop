@@ -79,9 +79,7 @@ export const LEVELS: string[] = [
 export const BADGES: string[] = [
   'BADGE.NEW',
   'BADGE.PRO',
-  'BADGE.HOT',
-  'BADGE.CLASSIC',
-  'BADGE.LOVED'
+  'BADGE.HOT'
 ];
 
 export const STATUSBUTTONS: StatusButton[] = [
@@ -147,6 +145,18 @@ export const PUBLISH_PUSH: NotificationPayload = {
     { action: 'explore', title: 'Ver Artículo' }
   ],
   broadcast: true,
+  admin: false,
+  data: {}
+};
+
+export const DRAFT_PUSH: NotificationPayload = {
+  body: 'Nuevo Borrador Publicado',
+  requireInteraction: true,
+  actions: [
+    { action: 'explore', title: 'Recibido' }
+  ],
+  broadcast: false,
+  admin: true,
   data: {}
 };
 

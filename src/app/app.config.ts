@@ -5,7 +5,7 @@ import { InjectionToken } from '@angular/core';
 import * as fromDrafts from '@app/core/ngrx/reducers/draft.reducer';
 import * as fromUsers from '@core/ngrx/reducers/user.reducer';
 
-const APP_VERSION = '0.5.4';
+const APP_VERSION = '0.5.5';
 export const URI = 'https://anticscode.netlify.com';
 
 export interface AppState {

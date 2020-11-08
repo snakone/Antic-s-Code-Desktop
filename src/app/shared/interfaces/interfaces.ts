@@ -163,6 +163,8 @@ export interface NotificationPayload {
   actions: NotificationAction[];
   user?: string;
   broadcast?: boolean;
+  admin?: boolean;
+  device?: string | RegExp;
 }
 
 interface NotificationData {
