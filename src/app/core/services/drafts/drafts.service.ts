@@ -10,7 +10,7 @@ import { filter, map } from 'rxjs/operators';
 export class DraftsService {
 
   readonly API_DRAFTS = environment.api + 'drafts/';
-  readonly API_USER = environment.api + 'user/';
+  readonly API_CONTENT = environment.api + 'content/';
 
   constructor(private http: HttpService) { }
 
@@ -27,7 +27,7 @@ export class DraftsService {
     sort: string = 'any'
   ): Observable<ArticleResponse> {
     return this.http
-      .get<ArticleResponse>(this.API_USER + 'content' + '?sort=' + sort)
+      .get<ArticleResponse>(this.API_CONTENT  + '?sort=' + sort)
       .pipe(
         filter(res => res && !!res.ok)
       );

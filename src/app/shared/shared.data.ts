@@ -26,6 +26,8 @@ export const CATEGORIES: string[] = [
   'CSS',
   'Javascript',
   'Angular',
+  'React',
+  'Vue',
   'Nodejs',
   'MongoDB',
   'Android',
@@ -55,19 +57,19 @@ export const LANGUAGES: string[] = [
 ];
 
 export const TAGS: string[] = [
-  'Consola',
-  'Desarrollo',
-  'Diseño',
-  'Material',
-  'Frontend',
-  'Backend',
-  'Typescript',
-  'Database',
-  'Mobile',
-  'Ionic',
-  'Config',
-  'Git',
-  'Antic\'s'
+  'TAGS.CONSOLE',
+  'TAGS.DEVELOP',
+  'TAGS.DESIGN',
+  'TAGS.MATERIAL',
+  'TAGS.FRONTEND',
+  'TAGS.BACKEND',
+  'TAGS.TYPESCRIPT',
+  'TAGS.DATABASE',
+  'TAGS.MOBILE',
+  'TAGS.IONIC',
+  'TAGS.CONFIG',
+  'TAGS.GIT',
+  'TAGS.ANTICS'
 ];
 
 export const LEVELS: string[] = [

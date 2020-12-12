@@ -13,8 +13,52 @@
   "NAME": "Difficulty"
  },
  "BADGE": {
+  "CLASSIC": "Classic",
   "HOT": "Hot",
+  "LOVED": "Loved",
   "NEW": "New",
   "PRO": "Prominent"
- }
+},
+ "CATEGORY": {
+  "TITLE": {
+      "ANDROID": "Mobile Development",
+      "ANGULAR": "The Google's Framework",
+      "REACT": "The Facebook UI library",
+      "VUE": "The Open Framework",
+      "ANTICS": "Content Creator",
+      "CSS": "Art on the Web",
+      "DENO": "Node Reformed",
+      "DESIGN": "Style and Design",
+      "GIT": "Version Control",
+      "GO": "The Google's Language",
+      "HTML": "Mark Language",
+      "JS": "Scripting Language",
+      "MONGO": "NOSQL Database",
+      "NODE": "Javascript on the Server Side",
+      "PYTHON": "The Open Language",
+      "PHP": "The Flexible Language"
+  }
+},
+"ANDROID.NATIVE": "Android Native",
+"GIT.SYSTEM": "Git System",
+"REACT.LIBRARY": "React Library",
+"MONGO.DB": "Mongo Database",
+"WEB.DESIGN": "Web Design",
+"DENO.SERVER": "Deno Server",
+"TAGS": {
+  "ANTICS": "Antic's",
+  "BACKEND": "Backend",
+  "CONFIG": "Config",
+  "CONSOLE": "Console",
+  "DATABASE": "Database",
+  "DESIGN": "Design",
+  "DEVELOP": "Develop",
+  "FRONTEND": "Frontend",
+  "GIT": "Git",
+  "IONIC": "Ionic",
+  "MATERIAL": "Material",
+  "MOBILE": "Mobile",
+  "NAME": "Tags",
+  "TYPESCRIPT": "Typescript"
+}
 }

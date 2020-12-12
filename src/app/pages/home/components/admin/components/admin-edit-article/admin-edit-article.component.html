@@ -53,7 +53,7 @@
       <nb-icon [icon]="check[1].icon"></nb-icon>
       <h4>{{check[1].name}}</h4>
       <p>{{check[1].hint}}</p>
-      <p class="example">{{draft.category}}</p>
+      <p class="example">{{draft.category | translate}}</p>
 
       <p>
         Después de echar un ojo al Artículo podrás decidir si la <strong>categoría</strong>
@@ -87,7 +87,7 @@
       <h4>{{check[2].name}}</h4>
       <p>{{check[2].hint}}</p>
       <p class="example">
-        <span class="tag" *ngFor="let t of draft.tags">{{t}}</span>
+        <span class="tag" *ngFor="let t of draft.tags">{{t | translate}}</span>
       </p>
 
       <p>
@@ -116,47 +116,12 @@
                [(ngModel)]="draft.check.hasGoodTags.cause">
       </div>
     </app-basic-card>
-    <!-- BADGES -->
-    <app-basic-card class="card">
-      <nb-icon [icon]="check[3].icon"></nb-icon>
-      <h4>{{check[3].name}}</h4>
-      <p>{{check[3].hint}}</p>
-      <p class="example">
-        <span class="tag" *ngFor="let b of draft.badges">{{b}}</span>
-      </p>
-
-      <p>
-        De todos los criterios este es el menos importante. Si es un Artículo
-        nuevo deberá tenerlo como estado. Si crees que el Artículo es
-        completo e interesante, <strong>destacado</strong> puede ser un buen estado.
-      </p>
-
-      <div class="checkbox">
-        <nb-checkbox status="danger"
-                     class="admin-check"
-                    [(ngModel)]="draft.check.hasGoodBadges.ok"
-                    [checked]="draft.check.hasGoodBadges.ok">
-          El Artículo tiene un <strong>estado</strong> acorde.
-        </nb-checkbox>
-      </div>
-
-      <div class="input-group animated fadeInDown"
-          *ngIf="!draft.check.hasGoodBadges.ok">
-        <mat-label>Causa</mat-label>
-        <input type="text"
-               placeholder="¿Por qué el estado no cumple los requisitos?"
-               class="form-control"
-               nbInput
-               fullWidth
-               [(ngModel)]="draft.check.hasGoodBadges.cause">
-      </div>
-    </app-basic-card>
     <!-- LEVEL -->
     <app-basic-card class="card">
       <nb-icon [icon]="check[4].icon"></nb-icon>
       <h4>{{check[4].name}}</h4>
       <p>{{check[4].hint}}</p>
-      <p class="example">{{draft.level}}</p>
+      <p class="example">{{draft.level | translate}}</p>
 
       <p>
         No todos los Artículos tendrán el mismo <strong>nivel</strong> ni irán dirigos a un

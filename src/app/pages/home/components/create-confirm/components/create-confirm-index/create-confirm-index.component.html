@@ -23,13 +23,13 @@
       <span>Etiquetas</span>
       <p class="grey">
         <em *ngFor="let t of draft.tags" class="grey">
-          {{ t }} &nbsp;
+          {{ t | translate}} &nbsp;
         </em>
       </p>
     </li>
     <li>
       <span>Nivel</span>
-      <p class="grey">{{ draft.level }}</p>
+      <p class="grey">{{ draft.level | translate}}</p>
     </li>
     <li>
       <span>Introducción</span>

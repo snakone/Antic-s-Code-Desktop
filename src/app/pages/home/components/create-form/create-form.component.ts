@@ -3,7 +3,7 @@ import * as fromArticles from '@app/core/ngrx/selectors/draft.selectors';
 import { Subject, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.config';
-import { takeUntil, switchMap } from 'rxjs/operators';
+import { takeUntil, switchMap, filter } from 'rxjs/operators';
 import { LoadDraftComponent } from '@app/shared/components/layout/dialogs/load-draft/load-draft.component';
 import { NbDialogService } from '@nebular/theme';
 import { Router } from '@angular/router';
@@ -35,8 +35,10 @@ export class CreateFormComponent implements OnInit, OnDestroy {
     this._draft.getContentByUser('Draft')
     .pipe(takeUntil(this.unsubscribe$))
      .subscribe((res: ArticleResponse) => {
-        this.store.dispatch(DraftActions.saveDraft({draft: res.drafts[0]}));
-        this.store.dispatch(DraftActions.showDraftDialog({show: true}));
+        if (res.drafts.length > 0) {
+          this.store.dispatch(DraftActions.saveDraft({draft: res.drafts[0]}));
+          this.store.dispatch(DraftActions.showDraftDialog({show: true}));
+        }
      });
   }
 
@@ -44,11 +46,10 @@ export class CreateFormComponent implements OnInit, OnDestroy {
     this.store.select(fromArticles.getShowDraftSnack)
     .pipe(
       takeUntil(this.unsubscribe$),
+      filter(res => res && !!res),
       switchMap((res: boolean) => {
-        if (res) {
-          const dialogRef = this.dialogService.open(LoadDraftComponent);
-          return dialogRef.onClose;
-        } else { return of(null); }
+        const dialogRef = this.dialogService.open(LoadDraftComponent);
+        return dialogRef.onClose;
      }))
      .subscribe((res: boolean) => {
       if (res) {

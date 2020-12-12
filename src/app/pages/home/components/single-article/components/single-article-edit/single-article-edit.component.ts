@@ -26,7 +26,6 @@ export class SingleArticleEditComponent implements OnInit, OnDestroy {
   categories = CATEGORIES;
   languages = LANGUAGES;
   tagsList = TAGS;
-  badgesList = BADGES;
   levelsList = LEVELS;
   imagePattern = '^.+\.(([pP][nN][gG])|([jJ][pP][gG]))$';  // Png, Jpg
   private unsubscribe$ = new Subject<void>();
@@ -60,6 +59,7 @@ export class SingleArticleEditComponent implements OnInit, OnDestroy {
     .subscribe((res: Article) => {
       if (res) {
         this.draft = res;
+        console.log(res);
         this.createArticleForm();
       }
     })
@@ -82,9 +82,6 @@ export class SingleArticleEditComponent implements OnInit, OnDestroy {
         Validators.required,
         this.selectValidator(3).bind(this)
       ]),
-      badges: new FormControl(this.draft.badges || null, [
-        Validators.required,
-        this.selectValidator(2).bind(this)]),
       summary: new FormControl(this.draft.summary || null, [
         Validators.required,
         Validators.minLength(100),

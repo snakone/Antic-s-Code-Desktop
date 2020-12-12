@@ -46,7 +46,7 @@
                  fullWidth
                  [status]="category.invalid ? 'danger' : 'success'">
         <nb-option *ngFor="let c of categories"
-                    [value]="c">{{ c }}
+                    [value]="c">{{ c | translate}}
         </nb-option>
       </nb-select>
     </div>
@@ -63,24 +63,7 @@
                  multiple
                  [status]="tags.invalid ? 'danger' : 'success'">
         <nb-option *ngFor="let t of tagsList"
-                    [value]="t">{{ t }}
-        </nb-option>
-      </nb-select>
-    </div>
-    <div class="input-group inline">
-      <mat-label>Elige estados para el Artículo</mat-label>
-      <nb-icon icon="info-outline"
-               [nbPopover]="badgesPopup"
-                nbPopoverPlacement="start"
-                nbPopoverTrigger="hover">
-      </nb-icon>
-      <nb-select formControlName="badges"
-                 placeholder="Badges"
-                 fullWidth
-                 multiple
-                 [status]="badges.invalid ? 'danger' : 'success'">
-        <nb-option *ngFor="let b of badgesList"
-                    [value]="b">{{ b | translate}}
+                    [value]="t">{{ t | translate}}
         </nb-option>
       </nb-select>
     </div>

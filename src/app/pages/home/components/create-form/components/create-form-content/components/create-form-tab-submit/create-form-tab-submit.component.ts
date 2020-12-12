@@ -6,7 +6,7 @@ import { UserService, CrafterService } from '@core/services/services.index';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.config';
-import { CATEGORIES, LANGUAGES, BADGES, LEVELS, TAGS } from '@shared/shared.data';
+import { CATEGORIES, LANGUAGES, LEVELS, TAGS } from '@shared/shared.data';
 import * as DraftActions from '@core/ngrx/actions/draft.actions';
 import { DraftsService } from '@core/services/drafts/drafts.service';
 import { takeUntil } from 'rxjs/operators';
@@ -25,7 +25,6 @@ export class CreateFormTabSubmitComponent implements OnInit {
   categories = CATEGORIES;
   languages = LANGUAGES;
   tagsList = TAGS;
-  badgesList = BADGES;
   levelsList = LEVELS;
   imagePattern = '^.+\.(([pP][nN][gG])|([jJ][pP][gG]))$';  // Png, Jpg
   private unsubscribe$ = new Subject<void>();
@@ -46,7 +45,6 @@ export class CreateFormTabSubmitComponent implements OnInit {
   get title() { return this.articleForm.get('title'); }
   get category() { return this.articleForm.get('category'); }
   get tags() { return this.articleForm.get('tags'); }
-  get badges() { return this.articleForm.get('badges'); }
   get level() { return this.articleForm.get('level'); }
   get cover() { return this.articleForm.get('cover'); }
   get summary() { return this.articleForm.get('summary'); }
@@ -70,10 +68,6 @@ export class CreateFormTabSubmitComponent implements OnInit {
         Validators.required,
         this.selectValidator(3).bind(this)
       ]),
-      badges: new FormControl(null, [
-        Validators.required,
-        this.selectValidator(2).bind(this)
-      ]),
       summary: new FormControl(null, [
         Validators.required,
         Validators.minLength(100),
@@ -95,7 +89,6 @@ export class CreateFormTabSubmitComponent implements OnInit {
         title,
         category,
         tags,
-        badges,
         level,
         cover,
         summary
@@ -110,8 +103,8 @@ export class CreateFormTabSubmitComponent implements OnInit {
         cover,
         summary,
         tags,
-        badges,
-        level
+        level,
+        type: 'draft'
       };
 
       this._draft.createDraft(draft)

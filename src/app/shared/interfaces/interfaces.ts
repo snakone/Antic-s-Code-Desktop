@@ -41,6 +41,7 @@ export interface Article extends Content {
   check?: Check;
   github?: boolean;
   githubLink?: string;
+  type?: string;
 }
 
 export interface UserResponse extends ServerResponse {
@@ -106,7 +107,6 @@ export interface Check {
   hasGoodTitle?: CheckStatus;
   hasGoodCategory?: CheckStatus;
   hasGoodTags?: CheckStatus;
-  hasGoodBadges?: CheckStatus;
   hasGoodLevel?: CheckStatus;
   hasGoodLinks?: CheckStatus;
   hasGoodCover?: CheckStatus;

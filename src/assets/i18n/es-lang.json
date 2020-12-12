@@ -13,8 +13,53 @@
     "NAME": "Dificultad"
   },
   "BADGE": {
+    "CLASSIC": "Clásico",
     "HOT": "Popular",
+    "LOVED": "Amado",
     "NEW": "Nuevo",
     "PRO": "Destacado"
+  },
+  "CATEGORY": {
+    "TITLE": {
+        "ANDROID": "Desarrollo Móvil",
+        "ANGULAR": "El Framework web de Google",
+        "ANTICS": "Creador de Contenido",
+        "REACT": "La librería UI de Facebook",
+        "VUE": "El Framework web libre",
+        "CSS": "Arte en la Web",
+        "DENO": "Node Reformado",
+        "DESIGN": "Estilo y Diseño",
+        "GIT": "Control de Versiones",
+        "GO": "El Lenguaje de Google",
+        "HTML": "Lenguaje de Marcas",
+        "JS": "Lenguaje de Scripting",
+        "MONGO": "NOSQL Database",
+        "NODE": "Javascript en el lado Servidor",
+        "PYTHON": "El Lenguaje Libre",
+        "PHP": "El Lenguaje Flexible"
+    }
+  },
+  "ANDROID.NATIVE": "Android Nativo",
+  "GIT.SYSTEM": "Sistema Git",
+  "MONGO.DB": "Base de datos Mongo",
+  "REACT.LIBRARY": "Librería React",
+  "VUE.FRAMEWORK": "Vue Framework",
+  "WEB.DESIGN": "Diseño Web",
+  "DENO.SERVER": "Servidor Deno",
+  "TAGS": {
+    "ANTICS": "Antic's",
+    "BACKEND": "Backend",
+    "CONFIG": "Config",
+    "CONSOLE": "Consola",
+    "DATABASE": "Base de Datos",
+    "DESIGN": "Diseño",
+    "DEVELOP": "Desarrollo",
+    "FRONTEND": "Frontend",
+    "GIT": "Git",
+    "IONIC": "Ionic",
+    "MATERIAL": "Material",
+    "MOBILE": "Móvil",
+    "NAME": "Etiquetas",
+    "TYPESCRIPT": "Typescript"
   }
 }
