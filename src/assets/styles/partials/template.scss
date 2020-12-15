@@ -16,6 +16,7 @@
     line-height: 1.7 !important;
     &:first-child { margin-top: 20px }
     &.first { margin-top: 10px }
+    &.pdf-page-break { display: none }
   }
 
   ul, ol {

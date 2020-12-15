@@ -68,6 +68,8 @@ export interface User {
   password: string;
   account: string;
   profile?: UserProfile;
+  stats?: UserStats;
+  auth?: boolean;
 }
 
 export interface UserProfile {
