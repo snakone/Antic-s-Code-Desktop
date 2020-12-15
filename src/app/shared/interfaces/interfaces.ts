@@ -178,3 +178,32 @@ interface NotificationAction {
   action: string;
   title: string;
 }
+
+export interface UserStats {
+  score: ScoreStats;
+}
+
+export interface ArticleStats {
+  written?: number;
+  score?: number;
+}
+
+export interface TestStats {
+  correct: number;
+  done?: number;
+  score?: number;
+}
+
+export interface ReactionStats {
+  likes?: number;
+  stars?: number;
+  score?: number;
+}
+
+export interface ScoreStats {
+  total?: number;
+  views?: number;
+  articles?: ArticleStats;
+  test?: TestStats;
+  reaction?: ReactionStats;
+}
